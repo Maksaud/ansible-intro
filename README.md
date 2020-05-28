@@ -78,9 +78,15 @@ other custum things
 
 dynamic lists of servers
 
-## Installing Ansible
+### Control nodes
 
-Enable 'extras' and 'Optional' yum repos
+Any machine with Ansible installed. You can run commands and playbooks, invoking /usr/bin/ansible or /usr/bin/ansible, from any control node. You can have multiple control nodes.
+
+### Managed nodes
+
+The network devices you manange with Ansible. sometimes called hosts. No ansible is installed on managed nodes.
+
+## Installing Ansible
 
 Install Ansible
 
@@ -88,45 +94,7 @@ Install Ansible
 
 pre-requisites - Python3 or python2
 
-## Ansible Language Basics
-
-Playbooks contain plays
-
-Plays contain tasks
-
-Tasks call modules
-
-Tasks run sequetially
-
-Handlers are triggered by tasks, and are run once, at the end of plays.
-
-example
-
-```ansible
-- name: install and start apche
-  hosts: web
-  remote_user: maksaud
-  become_method: sudo
-  become_user: root
-  vars:
-    http_port: 80
-    max_clients: 200
-  
-  tasks:
-  - name: install httpd
-    yum: name=httpd state=latest
-  - name:
-    write apache config file
-    template: src=srv/httpd.j2 dest=/etc/httpd.conf
-    notify:
-    - restart apache
-  - name: start httpd
-    service: name=httpd state=running
-
-  handlers:
-  - name: restart apache
-    service: name=httpd state=restarted
-```
+Create an ansible folder inside /etc and create hosts file inside which will include ips
 
 ##  Using Ansible
 
@@ -137,3 +105,10 @@ example
 - Playbooks: `ansible-playbook <option>`
 
 - Automation Framework: `Ansible Tower`
+
+A basic Ansible command or playbook:
+
+- Selects machines to execute against from inventory
+- Connects to those machines, usually over SSH
+- Copies one or more modules to the remote machines and starts execution there.
+
