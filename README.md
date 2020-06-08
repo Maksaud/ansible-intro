@@ -111,4 +111,3 @@ A basic Ansible command or playbook:
 - Selects machines to execute against from inventory
 - Connects to those machines, usually over SSH
 - Copies one or more modules to the remote machines and starts execution there.
-
